@@ -2,8 +2,6 @@ const fsp = require('fs').promises;
 const path = require('path');
 const pathDir = path.join(__dirname, 'secret-folder');
 
-
-// example - txt - 128.369kb
 async function filesInFolder(pathDir) {
   try {
     const files = await fsp.readdir(pathDir, {withFileTypes: true});
