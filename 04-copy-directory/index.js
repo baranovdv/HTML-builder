@@ -21,7 +21,7 @@ async function checkFile(fromFolder, toFolder, file) {
   }
 }
 
-async function copyFolder(folder) {
+async function copyDir(folder) {
   const folderCopy = path.join(path.dirname(folder), path.basename(folder) + '-copy');
   try {
     await checkFolder(folderCopy);
@@ -33,7 +33,6 @@ async function copyFolder(folder) {
   } catch (err) {
     console.error(err.message);
   }
-
 }
 
-copyFolder(pathDir);
+copyDir(pathDir);
