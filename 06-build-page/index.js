@@ -89,7 +89,7 @@ async function createBundleStyles() {
   }
 }
 
-async function createComponentsArray() {
+async function createComponentsObject() {
   try {
     const componentsArray = await fsp.readdir(pathComponents);
     for(let component of componentsArray) {
@@ -111,7 +111,7 @@ async function createComponentsArray() {
     await copyFolder(assets, assetsDeploy);
     const writeStream = fs.createWriteStream(fileDeploy);
     await createBundleStyles();
-    await createComponentsArray();
+    await createComponentsObject();
 
     const readStream = fs.createReadStream(fileTemplate);
     readStream.on('data', chunk => {  
@@ -120,7 +120,7 @@ async function createComponentsArray() {
 
     readStream.on('end', () => {
       for (let item in componentsObject){
-        template = template.replace(`    {{${item}}}`, componentsObject[item]);
+        template = template.replace(`{{${item}}}`, componentsObject[item]);
       }
       writeStream.write(template);
     });
